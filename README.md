@@ -1,6 +1,5 @@
-Hospital Food Management System
-Overview
-The Hospital Food Management System is designed to streamline the process of meal preparation, delivery, and patient-specific diet management within hospitals.
+
+NutriCare Hub: A  Hospital Food Management System, is designed to streamline the process of meal preparation, delivery, and patient-specific diet management within hospitals.
 The system provides role-based access for Hospital Food Managers, Pantry Staff, and Delivery Personnel, ensuring a smooth and efficient workflow for managing food and dietary needs of patients.
 
 Features & Functionalities
