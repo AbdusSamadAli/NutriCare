@@ -25,21 +25,20 @@ Specify ingredients and dietary restrictions (e.g., "low salt," "no sugar")
 
 2. Inner Pantry Staff
 
-The Inner Pantry Staff can:
-Manage Meal Preparation:
-View and update assigned meal preparation tasks
-Mark preparation tasks as completed.
-Manage Delivery Personnel:
-Add and manage delivery personnel details (Name, Contact Info)
-Assign meal boxes to delivery staff
-Track Meal Deliveries:
-Monitor delivery progress (Patient, Room Number, Diet Chart)
-Update delivery status as "Delivered".
+  The Inner Pantry Staff can:
+  Manage Meal Preparation,
+  View and update assigned meal preparation tasks,
+  Mark preparation tasks as completed,
+  Add and manage delivery personnel details (Name, Contact Info),
+  Assign meal boxes to delivery staff,
+  Track Meal Deliveries,
+  Monitor delivery progress (Patient, Room Number, Diet Chart),
+  Update delivery status as "Delivered".
 
 3. Delivery Personnel
 
  The Delivery Personnel can:
-Mark Deliveries as Completed:
+Mark Deliveries as Completed,
 Login to the pantry portal and view assigned meal boxes
 
 Technologies Used:
@@ -52,4 +51,4 @@ Backend: Node.js, Express.js, Prisma ORM
 
 Database: MongoDB
 
-Authentication: JWT for secure login and role-based access
+Authentication: JWT for secure login
