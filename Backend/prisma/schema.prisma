@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  username       String   @unique
+  email          String   @unique
+  password       String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  tasks          Task[]   @relation("AssignedTo") // Tasks assigned to this user
+  assignedTasks  Task[]   @relation("AssignedBy") // Tasks assigned by this user
+}
+
+model PantryStaff {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName  String
+  lastName   String
+  position   String
+  email      String   @unique
+  password   String
+  tasks      Task[]   @relation("PantryTasks") // Define relation with Task
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model DeliveryPersonnel {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName  String
+  lastName   String
+  phone      String
+  email      String   @unique
+  password   String
+  tasks      Task[]   @relation("DeliveryTasks") // Define relation with Task
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Task {
+  id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+  taskName            String
+  taskDescription     String              // Ensure this is defined correctly
+  assignedById        String?             @db.ObjectId
+  assignedToId        String?             @db.ObjectId
+  pantryStaffId       String?             @db.ObjectId
+  deliveryPersonnelId String?             @db.ObjectId
+  assignedBy          User?               @relation("AssignedBy", fields: [assignedById], references: [id])
+  assignedTo          User?               @relation("AssignedTo", fields: [assignedToId], references: [id])
+  pantryStaff         PantryStaff?        @relation("PantryTasks", fields: [pantryStaffId], references: [id])
+  deliveryPersonnel   DeliveryPersonnel?  @relation("DeliveryTasks", fields: [deliveryPersonnelId], references: [id])
+  status              String              @default("Pending") // Pending, In Progress, Done
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+}
+
+
+model FoodChart {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  items       String[] // Array of items in the chart
+  calories    Int
+  createdAt   DateTime @default(now())
+}
+model Patient {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String   @unique
+  diseases           String
+  allergies          String
+  roomNumber         Int
+  bedNumber          Int
+  floorNumber        Int
+  age                Int
+  gender             String
+  contactInformation String
+  emergencyContact   String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
